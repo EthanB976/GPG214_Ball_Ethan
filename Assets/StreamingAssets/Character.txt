@@ -1,0 +1,1 @@
+Player Name: Nathan, Player Health: 100, Player Weapon: sword
