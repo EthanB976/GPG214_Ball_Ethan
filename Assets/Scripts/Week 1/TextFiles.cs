@@ -15,6 +15,7 @@ public class TextFiles : MonoBehaviour
     void Start()
     {
         GetTextFileContents();
+        ParseCharacterInfo(textFileContents);
     }
 
     // Update is called once per frame
@@ -42,6 +43,28 @@ public class TextFiles : MonoBehaviour
     {
         string[] valuesFromText = characterInfo.Split(new char[] { ':', ',' }, System.StringSplitOptions.RemoveEmptyEntries);
 
+        if(valuesFromText.Length % 2 != 0)
+        {
+            // there are uneven number of entries
+            Debug.LogError("Something went wrong parsing the data, there is uneven amount of entries");
+            return;
+        }
+
+        Dictionary<string, string> characterInfoDictionary = new Dictionary<string, string>();
+
+        for(int i = 0; i < valuesFromText.Length; i += 2)
+        {
+            string currentKey = valuesFromText[i].Trim();
+            string currentValue = valuesFromText[i + i].Trim();
+            Debug.Log(currentValue);
+
+            characterInfoDictionary.Add(currentKey, currentValue);
+        }
+
+        foreach(KeyValuePair<string, string> pair in characterInfoDictionary)
+        {
+            Debug.Log("Key: " + pair.Key + " Value: " + pair.Value);
+        }
 
     }
 }
